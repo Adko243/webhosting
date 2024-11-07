@@ -1,4 +1,5 @@
 import re
+import plotly
 import plotly.graph_objects as go
 import streamlit as st
 from shapely.geometry import Polygon, Point
