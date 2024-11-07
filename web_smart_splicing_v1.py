@@ -247,27 +247,29 @@ def main():
     # Let the user specify the file path manually
     #file_path = st.text_input("Enter the file path for the .CUT file:", "test.cut")
     
-    
-    if raw_lines:
-        try:
-            # Plot and display the combined shapes in Plotly
-            fig = plot_all_sections_original(raw_lines)
-            st.plotly_chart(fig, use_container_width=True, key="plot")
+    try:
+        if raw_lines:
+            try:
+                # Plot and display the combined shapes in Plotly
+                fig = plot_all_sections_original(raw_lines)
+                st.plotly_chart(fig, use_container_width=True, key="plot")
 
-            Smart_Splicing = st.checkbox("Smart Splicing")
+                Smart_Splicing = st.checkbox("Smart Splicing")
 
-            if Smart_Splicing:
-                defect = int(st.text_input("Defect location (cm)", 100))*100
-                fig2, min_value, max_value = plot_all_sections_smart_splicing(raw_lines, defect)
-                
-                # Display the plot with a unique key
-                
-                st.plotly_chart(fig2, use_container_width=True, key="plot2")
-                st.markdown(f"Overlapping #1: **{min_value/100} cm**")
-                st.markdown(f"Overlapping #2: **{max_value/100} cm**")
+                if Smart_Splicing:
+                    defect = int(st.text_input("Defect location (cm)", 100))*100
+                    fig2, min_value, max_value = plot_all_sections_smart_splicing(raw_lines, defect)
+                    
+                    # Display the plot with a unique key
+                    
+                    st.plotly_chart(fig2, use_container_width=True, key="plot2")
+                    st.markdown(f"Overlapping #1: **{min_value/100} cm**")
+                    st.markdown(f"Overlapping #2: **{max_value/100} cm**")
 
-        except Exception as e:
-            st.error(f"Error loading or plotting the file: {e}")
+            except Exception as e:
+                st.error(f"Error loading or plotting the file: {e}")
+    except:
+        pass
 
 
 if __name__ == "__main__":
